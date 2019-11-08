@@ -103,6 +103,7 @@ cmake3 \
  	-DUUID_INCLUDE_DIR=/usr/include \
  	-DUUID_LIBRARY_RELEASE=/lib64/libuuid.so.1 \
 	-DWITH_ETP=ON \
+	-DWITH_EXAMPLE=TRUE \
 	-DBOOST_INCLUDEDIR=/usr/include/boost169 \
 	-DBOOST_LIBRARYDIR=/usr/lib64/boost169 \
 	-DAVRO_INCLUDE_DIR=/usr/local/include/avro \
