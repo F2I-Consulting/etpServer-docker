@@ -76,9 +76,9 @@ make install && \
 # avro install
 # avro is a dependence of fesapi etp
 cd ../.. && \
-wget https://apache.mirrors.benatherton.com/avro/stable/cpp/avro-cpp-1.9.2.tar.gz && \
-tar xf avro-cpp-1.9.2.tar.gz && \
-cd avro-cpp-1.9.2 && \
+wget https://apache.mirrors.benatherton.com/avro/stable/cpp/avro-cpp-1.10.0.tar.gz && \
+tar xf avro-cpp-1.10.0.tar.gz && \
+cd avro-cpp-1.10.0 && \
 mkdir build && \
 cd build && \
 cmake3 -G "Unix Makefiles" -DBOOST_INCLUDEDIR=/usr/include/boost169/ -DBOOST_LIBRARYDIR=/usr/lib64/boost169 .. && \
