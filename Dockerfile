@@ -162,8 +162,8 @@ RUN ./example
 # high-order ports.
 #
 # in order to run the container on your docker desktop use, please use:
-# docker run -p 8080:8080 [IMAGE]
-EXPOSE 8080
+# docker run -p 80:80 [IMAGE]
+EXPOSE 80 443
 
 # setting command to launch at runtime
-CMD ["./etpServerExample", "0.0.0.0", "8080", "../../testingPackageCpp.epc"]
+CMD ["./etpServerExample", "0.0.0.0", "80", "../../testingPackageCpp.epc"]
