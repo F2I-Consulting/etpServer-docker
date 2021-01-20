@@ -22,16 +22,14 @@ ENV CXXFLAGS="-fPIC -O2"
 
 # RUN lance les commandes
 RUN	yum install -y \
-	# minizip is a dependence of fesapi \ 
-	minizip-devel \ 	
-	# git is used to clone fesapi repository from GitHub \	
-	git \				
+	# minizip is a dependence of fesapi \
+	minizip-devel \
+	# git is used to clone fesapi repository from GitHub \
+	git \
 	# C and C++ compilers
-	gcc-c++ \		
+	gcc-c++ \
 	# make is used to process Unix Makefiles
-	make \				
-	# libuuid is a dependence of fesapi
-	libuuid-devel \
+	make \
 	# wget is used to download ressources. We use it instead of ADD in order to
 	# minimize the size of the docker image by limitating the number of layers
 	wget &&\
@@ -54,9 +52,9 @@ mkdir fesapiEnv && \
 cd fesapiEnv && \
 mkdir dependencies && \
 cd dependencies && \
-wget https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-1.10/hdf5-1.10.5/src/hdf5-1.10.5.tar.gz && \
-tar xf hdf5-1.10.5.tar.gz && \
-cd hdf5-1.10.5 && \
+wget https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-1.12/hdf5-1.12.0/src/hdf5-1.12.0.tar.gz && \
+tar xf hdf5-1.12.0.tar.gz && \
+cd hdf5-1.12.0 && \
 mkdir build && \
 cd build && \
 cmake3 -G "Unix Makefiles" \
@@ -67,7 +65,7 @@ cmake3 -G "Unix Makefiles" \
 	-DHDF5_BUILD_EXAMPLES:BOOL=OFF \
 	-DHDF5_BUILD_CPP_LIB:BOOL=OFF \
 	-DHDF5_BUILD_HL_LIB:BOOL=OFF \
-	-DCMAKE_INSTALL_PREFIX:STRING=/fesapiEnv/dependencies/hdf5-1.10.5/hdf5 \
+	-DCMAKE_INSTALL_PREFIX:STRING=/fesapiEnv/dependencies/hdf5-1.12.0/hdf5 \
 	.. && \
 cmake3 --build . --config Release && \	
 make install && \
@@ -93,14 +91,12 @@ cd ..  && \
 mkdir build && \
 cd build && \
 cmake3 \
- 	-DHDF5_C_INCLUDE_DIR=/fesapiEnv/dependencies/hdf5-1.10.5/hdf5/include \
-	-DHDF5_C_LIBRARY_RELEASE=/fesapiEnv/dependencies/hdf5-1.10.5/hdf5/lib/libhdf5.a \
+ 	-DHDF5_C_INCLUDE_DIR=/fesapiEnv/dependencies/hdf5-1.12.0/hdf5/include \
+	-DHDF5_C_LIBRARY_RELEASE=/fesapiEnv/dependencies/hdf5-1.12.0/hdf5/lib/libhdf5.a \
 	-DMINIZIP_INCLUDE_DIR=/usr/include/minizip \
 	-DMINIZIP_LIBRARY_RELEASE=/usr/lib64/libminizip.so \
  	-DZLIB_INCLUDE_DIR=/usr/include \
  	-DZLIB_LIBRARY_RELEASE=/usr/lib64/libz.so \
- 	-DUUID_INCLUDE_DIR=/usr/include \
- 	-DUUID_LIBRARY_RELEASE=/lib64/libuuid.so.1 \
 	-DWITH_ETP=ON \
 	-DWITH_EXAMPLE=TRUE \
 	-DBOOST_INCLUDEDIR=/usr/include/boost169 \
@@ -114,7 +110,6 @@ cmake3 \
 	-DBoost_USE_RELEASE_LIBS=ON \
 	-DBoost_USE_MULTITHREADED=ON \
 	-DBoost_USE_STATIC_RUNTIME=OFF \
-	-DHDF5_1_10=ON \
 	../fesapi && \
 make VERBOSE=OFF && \
 make install && \ 
@@ -136,13 +131,11 @@ yum remove -y \
 	git \
 	gcc-c++ \
 	make \
-	libuuid-devel \
 	wget \
 	--remove-leaves && \
 yum remove -y yum-plugin-remove-with-leaves && \
 yum install -y \
 	minizip \
-	libuuid && \
 yum clean all
 
 # generate .epc and .h5 files
